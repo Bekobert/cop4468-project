@@ -26,16 +26,16 @@ export default function IndexPage({ navigation }){
     <View style={{flex: 1}}>
       
       <View style = {{backgroundColor: 'powderblue', flex: 1}} > </View>
-      <View style = {{backgroundColor: 'lightsteelblue', flex:10}} > 
+      <View style = {{justifyContent: 'center', backgroundColor: 'lightsteelblue', flex:10}} > 
         
         <View style = {{flex: 2, backgroundColor: 'lavender', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button onPress={() => goProducts()} title='Go to Products!' ></Button>
+            <Button style = {{}} onPress={() => goProducts()} title='Products!' ></Button>
         </View>
         <View style = {{flex: 2, backgroundColor: 'gainsboro', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button onPress={() => goCategories()} title='Go to Categories!' ></Button>
+            <Button onPress={() => goCategories()} title='Categories!' ></Button>
         </View>
         <View style = {{flex: 2, backgroundColor: 'moccasin', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button onPress={() => goOrders()} title='Go to Orders!' ></Button>
+            <Button onPress={() => goOrders()} title='Orders!' ></Button>
         </View>
 
       </View>
