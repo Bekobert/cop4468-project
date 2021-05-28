@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button } from 'react-native'
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 
 export default function IndexPage({ navigation }){
 
@@ -25,23 +24,38 @@ export default function IndexPage({ navigation }){
     return (
     <View style={{flex: 1}}>
       
-      <View style = {{backgroundColor: 'powderblue', flex: 1}} > </View>
       <View style = {{justifyContent: 'center', backgroundColor: 'lightsteelblue', flex:10}} > 
         
-        <View style = {{flex: 2, backgroundColor: 'lavender', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button style = {{}} onPress={() => goProducts()} title='Products!' ></Button>
-        </View>
-        <View style = {{flex: 2, backgroundColor: 'gainsboro', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button onPress={() => goCategories()} title='Categories!' ></Button>
-        </View>
-        <View style = {{flex: 2, backgroundColor: 'moccasin', padding: 10, margin: 30, borderRadius: 20 }} > 
-            <Button onPress={() => goOrders()} title='Orders!' ></Button>
-        </View>
+        <TouchableOpacity style = {{flex: 2, backgroundColor: 'lavender', padding: 10, margin: 30, borderRadius: 20 }} onPress={() => goProducts()}>
+            <View style = {styles.centered}>  
+                <Text style={{}} >PRODUCTS</Text>
+            </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style = {{flex: 2, backgroundColor: 'gainsboro', padding: 10, margin: 30, borderRadius: 20 }} onPress={() => goCategories()}>
+            <View style = {styles.centered}> 
+                <Text style={{}} >CATEGORIES</Text>
+            </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style = {{flex: 2, backgroundColor: 'moccasin', padding: 10, margin: 30, borderRadius: 20 }} onPress={() => goOrders()}>
+            <View style = {styles.centered}> 
+                <Text style={{}} >ORDERS</Text>
+            </View>
+        </TouchableOpacity>
 
       </View>
     
-
     </View>
     );
+
+    
 }
 
+const styles = StyleSheet.create({
+    // ...
+    centered: {
+      alignItems:'center',
+      margin: '40px'
+    }
+  });
