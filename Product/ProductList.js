@@ -14,6 +14,13 @@ const ProductList = ({navigation}) => {
 
     useEffect(() => {
        
+        getData();
+
+    }, []);
+
+
+    const getData = () =>{
+        
         fetch('https://northwind.vercel.app/api/products')
         .then((prods) => prods.json())
         .then((data) => {
@@ -22,11 +29,25 @@ const ProductList = ({navigation}) => {
             
 
         })
-
-    }, [])
+    }
 
     const goDetails = (item) =>{
         navigation.navigate('Product Details', {t:item});
+    }
+
+    const deleteProducts = (id) =>{
+        let requestOptions = {
+            method: 'DELETE',
+            body: JSON.stringify({id:id})
+        }
+
+        fetch('https://northwind.vercel.app/api/products/' + id, requestOptions)
+        .then((res) => res.json())
+        .then((data) =>{
+            getData();
+            
+        })
+
     }
 
     return (
@@ -54,7 +75,7 @@ const ProductList = ({navigation}) => {
                                     </View>
                                 </ListItem>
                             </TouchableOpacity>
-                            <TouchableOpacity style={{flex:2, padding:20, margin: 10, backgroundColor: 'moccasin', borderRadius: 10, justifyContent:'center'}}>
+                            <TouchableOpacity onPress={() => deleteProducts(item.id)} style={{flex:2, padding:20, margin: 10, backgroundColor: 'moccasin', borderRadius: 10, justifyContent:'center'}}>
                                 <FireOutlined style={{fontSize:'50px'}} />
                             </TouchableOpacity>
                         </View>
