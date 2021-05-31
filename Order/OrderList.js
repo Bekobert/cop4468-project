@@ -7,6 +7,7 @@ const OrderList = () => {
     
     const [orders, setorders] = useState([]);
 
+
     useEffect(() => {
         
         fetch('https://northwind.vercel.app/api/orders')
@@ -14,7 +15,8 @@ const OrderList = () => {
         .then((data) =>{
 
             setorders(data);
-            
+            //orders.sort((x,y) => (x.orderDate < y.orderDate) ? 1 : -1);
+
         })
 
     }, [])
@@ -30,14 +32,16 @@ const OrderList = () => {
                     {
                         orders.map((item) => (
                             <TouchableOpacity key={item.id} style={{ flex: 1, backgroundColor: 'moccasin', padding: 20, margin: 10, borderRadius: 10}}>
-                                <View>
-                                    <ListItem key={item.id}>
-                                        <ListItem.Content>
-                                            <ListItem.Title> {item.shipName} </ListItem.Title>
-                                            <Text> {item.shipAddress.city} </Text>
-                                        </ListItem.Content>
+                                
+                                    <ListItem>
+                                            <ListItem.Content>
+                                                    <ListItem.Title> ID: {item.customerId} </ListItem.Title>
+                                                    <ListItem.Subtitle> Order Date: {item.orderDate} </ListItem.Subtitle>
+                                                    <ListItem.Subtitle> Ship Name: {item.shipName} </ListItem.Subtitle>
+                                                    <ListItem.Subtitle> Ship Address: {item.shipAddress.street} {item.shipAddress.city} {item.shipAddress.region} {item.shipAddress.postalCode} {item.shipAddress.country}</ListItem.Subtitle>
+                                            </ListItem.Content>
                                     </ListItem>
-                                </View>
+                                
                             </TouchableOpacity>
                             
                         ))
