@@ -6,6 +6,8 @@ import ProductList from './Product/ProductList'
 import ProductDetails from './Product/ProductDetails'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
+import TPro from './MyThemeContext'
+
 
 export default function App() {
 
@@ -13,15 +15,18 @@ export default function App() {
 
   return (  
 
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Index" component={IndexPage} />
-        <Stack.Screen name="Products" component={ProductList} />
-        <Stack.Screen name="Product Details" component={ProductDetails} />
-        <Stack.Screen name="Categories" component={CategoryList} />
-        <Stack.Screen name="Orders" component={OrderList} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <TPro>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Index" component={IndexPage} />
+          <Stack.Screen name="Products" component={ProductList} />
+          <Stack.Screen name="Product Details" component={ProductDetails} />
+          <Stack.Screen name="Categories" component={CategoryList} />
+          <Stack.Screen name="Orders" component={OrderList} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </TPro>
+
 
     //<IndexPage></IndexPage>
     

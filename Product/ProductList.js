@@ -1,15 +1,17 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import {ListItem, Icon} from 'react-native-elements'
 import {FireOutlined} from '@ant-design/icons'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
+import {ThemeContext} from '../MyThemeContext'
 
 
 
 
 const ProductList = ({navigation}) => {
-
+    
+    const Atheme = useContext(ThemeContext) 
     const [products, setproducts] = useState([]);
 
     useEffect(() => {
@@ -52,17 +54,15 @@ const ProductList = ({navigation}) => {
 
     return (
 
-        
-
         <View style={{flex: 1}} >
             
-            <View style={{flex:8, backgroundColor: 'lightsteelblue'}}>
+            <View style={{flex:8, backgroundColor: Atheme.primaryBackground}}>
             
                 {
                     products.map((item) => (
                         <View key={item.id} style={{flexDirection:'row'}} >
                             <TouchableOpacity onPress={() => goDetails(item)} style={{ flex: 10, backgroundColor: 'moccasin', padding: 20, margin: 10, borderRadius: 10}}>
-                                <ListItem key={item.id}>
+                                <ListItem containerStyle={{ backgroundColor: 'red' }} key={item.id}>
                                     <View sytle={{flexDirection:'row'}} >
                                         <ListItem.Content>
                                             <ListItem.Title> {item.name} </ListItem.Title>
