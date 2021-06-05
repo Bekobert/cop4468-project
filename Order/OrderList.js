@@ -31,18 +31,18 @@ const OrderList = () => {
             
                     {
                         orders.map((item) => (
-                            <TouchableOpacity key={item.id} style={{ flex: 1, backgroundColor: 'moccasin', padding: 20, margin: 10, borderRadius: 10}}>
+                            <View key={item.id} style={{ flex: 1, backgroundColor: 'moccasin', padding: 20, margin: 10, borderRadius: 10}}>
                                 
-                                    <ListItem>
+                                    <ListItem containerStyle={{ backgroundColor: 'gainsboro', borderRadius:10 }} >
                                             <ListItem.Content>
-                                                    <ListItem.Title> ID: {item.customerId} </ListItem.Title>
-                                                    <ListItem.Subtitle> Order Date: {item.orderDate} </ListItem.Subtitle>
-                                                    <ListItem.Subtitle> Ship Name: {item.shipName} </ListItem.Subtitle>
-                                                    <ListItem.Subtitle> Ship Address: {item.shipAddress.street} {item.shipAddress.city} {item.shipAddress.region} {item.shipAddress.postalCode} {item.shipAddress.country}</ListItem.Subtitle>
+                                                    <ListItem.Title style={{fontFamily: 'monospace'}}> ID: {item.customerId} </ListItem.Title>
+                                                    <ListItem.Subtitle style={{fontFamily: 'monospace'}}> Order Date: {item.orderDate} </ListItem.Subtitle>
+                                                    <ListItem.Subtitle style={{fontFamily: 'monospace'}}> Ship Name: {item.shipName} </ListItem.Subtitle>
+                                                    <ListItem.Subtitle style={{fontFamily: 'monospace'}}> Ship Address: {item.shipAddress.street} {item.shipAddress.city} {item.shipAddress.region} {item.shipAddress.postalCode} {item.shipAddress.country}</ListItem.Subtitle>
                                             </ListItem.Content>
                                     </ListItem>
                                 
-                            </TouchableOpacity>
+                            </View>
                             
                         ))
                     }

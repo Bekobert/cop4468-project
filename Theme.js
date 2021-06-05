@@ -1,7 +1,7 @@
 export default {
 
     primaryBackground: 'lightsteelblue',
-    secondaryBackground: 'moccasin'
-
+    secondaryBackground: 'moccasin',
+    fonty: 'monospace'
 
 }

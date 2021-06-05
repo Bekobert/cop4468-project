@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import {ListItem, Icon} from 'react-native-elements'
-import {FireOutlined} from '@ant-design/icons'
+import {FireTwoTone} from '@ant-design/icons'
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 import {ThemeContext} from '../MyThemeContext'
@@ -37,7 +37,7 @@ const ProductList = ({navigation}) => {
         navigation.navigate('Product Details', {t:item});
     }
 
-    const deleteProducts = (id) =>{
+    const deleteProducts = (item, id) =>{
         let requestOptions = {
             method: 'DELETE',
             body: JSON.stringify({id:id})
@@ -49,7 +49,7 @@ const ProductList = ({navigation}) => {
             getData();
             
         })
-
+        alert(item.name + ' deleted')
     }
 
     return (
@@ -62,21 +62,21 @@ const ProductList = ({navigation}) => {
                     products.map((item) => (
                         <View key={item.id} style={{flexDirection:'row'}} >
                             <TouchableOpacity onPress={() => goDetails(item)} style={{ flex: 10, backgroundColor: 'moccasin', padding: 20, margin: 10, borderRadius: 10}}>
-                                <ListItem containerStyle={{ backgroundColor: 'red' }} key={item.id}>
+                                <ListItem containerStyle={{ backgroundColor: 'gainsboro', borderRadius:10 }} key={item.id}>
                                     <View sytle={{flexDirection:'row'}} >
                                         <ListItem.Content>
-                                            <ListItem.Title> {item.name} </ListItem.Title>
+                                            <ListItem.Title style={{fontFamily: 'monospace'}}> {item.name} </ListItem.Title>
                                             <View style= {{flexDirection:'row'}} >
-                                                <Text> In Stock: {item.unitsInStock} </Text>
-                                                <Text> Price: {item.unitPrice} </Text>
+                                                <Text style={{fontFamily: 'monospace'}} > In Stock: {item.unitsInStock} </Text>
+                                                <Text style={{fontFamily: 'monospace'}} > Price: {item.unitPrice} </Text>
                                             </View>
                                         </ListItem.Content>
                                         
                                     </View>
                                 </ListItem>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => deleteProducts(item.id)} style={{flex:2, padding:20, margin: 10, backgroundColor: 'moccasin', borderRadius: 10, justifyContent:'center'}}>
-                                <FireOutlined style={{fontSize:'50px'}} />
+                            <TouchableOpacity onPress={() => deleteProducts(item, item.id)} style={{flex:1, padding:20, margin: 10, backgroundColor: 'moccasin', borderRadius: 10, justifyContent:'center', alignItems:'center'}}>
+                                <FireTwoTone twoToneColor='#8b0000' style={{fontSize:'50px'}} />
                             </TouchableOpacity>
                         </View>
                         
