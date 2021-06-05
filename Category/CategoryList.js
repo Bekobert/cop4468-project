@@ -1,8 +1,9 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useState, useEffect, useContext, useCallback} from 'react'
 import { View, Text, TouchableOpacity } from 'react-native'
 import {ListItem} from 'react-native-elements'
 import {EditTwoTone, FireTwoTone} from '@ant-design/icons'
 import {ThemeContext} from '../MyThemeContext'
+import { useFocusEffect } from '@react-navigation/native';
 
 
 const CategoryList = ({route,navigation}) => {
@@ -10,11 +11,12 @@ const CategoryList = ({route,navigation}) => {
     const [categories, setcategories] = useState([]);
     const Atheme = useContext(ThemeContext)
 
-    useEffect(() => {
-        
-        getData();
 
-    }, [])
+    useFocusEffect(useCallback(() => {
+
+        getData();
+        
+    }, []));
 
     const getData = () =>{
         

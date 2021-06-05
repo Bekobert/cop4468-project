@@ -1,10 +1,26 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-import {Input} from 'react-native-elements'
+import React, {useState} from 'react'
+import { TouchableOpacity } from 'react-native';
+import { View, Text} from 'react-native'
+import {Input, Button} from 'react-native-elements'
 
-const UpdateCategory = ({route}) => {
+const UpdateCategory = ({route, navigation}) => {
     
     const { t } = route.params;
+
+    const [name, setname] = useState(t.name)
+    const [description, setdescription] = useState(t.description)
+
+    const updateRequest = () =>{
+        let requestOptions = {
+            method: 'PUT',
+            body: JSON.stringify({id:t.id, description, name})
+        }
+
+        fetch('https://northwind.vercel.app/api/categories', requestOptions)
+        .then((res) => navigation.goBack())
+        
+    }
+
 
     return (
         <View style={{flex:1}} >
@@ -16,12 +32,13 @@ const UpdateCategory = ({route}) => {
 
                 <View style={{backgroundColor:'moccasin', margin:10, borderRadius:10}} > 
                     <Text style={{fontFamily:'monospace', fontWeight:'bold', fontSize:30}} > Category Name </Text>
-                    <Input placeholder= {t.name}/>
+                    <Input value={name} onChange={(newval) => {setname(newval.target.value)}} />
                 </View>
                 <View style={{backgroundColor:'moccasin', margin:10, borderRadius:10}} >
                     <Text style={{fontFamily:'monospace', fontWeight:'bold', fontSize:30}} > Category Infos </Text>
-                    <Input placeholder= {t.description}/>
+                    <Input value={description} onChange={(newval) => {setdescription(newval.target.value)}} />
                 </View>
+                <Button onPress = {updateRequest} title='Submit' titleStyle={{color:'black'}} containerStyle={{margin:30, borderRadius:10}} buttonStyle={{backgroundColor:'moccasin'}} />
 
                 <View style={{backgroundColor:'gainsboro', height:40, marginTop:50}} />
                 <View style={{backgroundColor:'gainsboro', height:40, marginTop:20}} />

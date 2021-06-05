@@ -1,9 +1,24 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { View, Text } from 'react-native'
-import {Input} from 'react-native-elements'
+import {Input, Button} from 'react-native-elements'
 
 
-const AddCategory = ({navigation}) => {
+const AddCategory = ({route, navigation}) => {
+
+    const [name, setname] = useState('')
+    const [description, setdescription] = useState('')
+
+    const addRequest = () =>{
+        let requestOptions = {
+            method: 'POST',
+            body: JSON.stringify({description, name})
+        }
+
+        fetch('https://northwind.vercel.app/api/categories', requestOptions)
+        .then((res) => navigation.goBack())
+        
+    }
+
     return (
         <View style={{flex:1}} >
             <View style={{flex:8, backgroundColor: 'lightsteelblue', justifyContent:'center'}}>
@@ -14,12 +29,13 @@ const AddCategory = ({navigation}) => {
 
                 <View style={{backgroundColor:'moccasin', margin:10, borderRadius:10}} > 
                     <Text style={{fontFamily:'monospace', fontWeight:'bold', fontSize:30}} > Category Name </Text>
-                    <Input placeholder= 'Enter a name'/>
+                    <Input value={name} onChange={(newval) => {setname(newval.target.value)}} />
                 </View>
                 <View style={{backgroundColor:'moccasin', margin:10, borderRadius:10}} >
                     <Text style={{fontFamily:'monospace', fontWeight:'bold', fontSize:30}} > Category Infos </Text>
-                    <Input placeholder= 'Enter an info'/>
+                    <Input value={description} onChange={(newval) => {setdescription(newval.target.value)}} />
                 </View>
+                <Button onPress = {addRequest} title='Submit' titleStyle={{color:'black'}} containerStyle={{margin:30, borderRadius:10}} buttonStyle={{backgroundColor:'moccasin'}} />
 
                 <View style={{backgroundColor:'gainsboro', height:40, marginTop:50}} />
                 <View style={{backgroundColor:'gainsboro', height:40, marginTop:20}} />

@@ -13,7 +13,7 @@ const OrderList = () => {
         fetch('https://northwind.vercel.app/api/orders')
         .then((ords) => ords.json())
         .then((data) =>{
-
+            
             setorders(data);
             //orders.sort((x,y) => (x.orderDate < y.orderDate) ? 1 : -1);
 
