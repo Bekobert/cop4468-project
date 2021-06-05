@@ -1,35 +1,66 @@
 import React, {useState, useEffect, useContext} from 'react'
-import { Button } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native'
 import {ListItem} from 'react-native-elements'
-import {FireOutlined, EditTwoTone, FireTwoTone} from '@ant-design/icons'
+import {EditTwoTone, FireTwoTone} from '@ant-design/icons'
 import {ThemeContext} from '../MyThemeContext'
 
 
-const CategoryList = () => {
+const CategoryList = ({route,navigation}) => {
 
     const [categories, setcategories] = useState([]);
     const Atheme = useContext(ThemeContext)
 
     useEffect(() => {
         
+        getData();
+
+    }, [])
+
+    const getData = () =>{
+        
         fetch('https://northwind.vercel.app/api/categories')
         .then((cats) => cats.json())
-        .then((data) =>{
+        .then((data) => {
 
             setcategories(data);
             
 
         })
+    }
 
-    }, [])
+    const deleteCategory = (item, id) =>{
+        let requestOptions = {
+            method: 'DELETE',
+            body: JSON.stringify({id:id})
+        }
 
+        fetch('https://northwind.vercel.app/api/categories/' + id, requestOptions)
+        .then((res) => res.json())
+        .then((data) =>{
+            getData();
+            
+        })
+        alert(item.name + ' deleted')
+    }
+
+    const ACat = () =>{
+        navigation.navigate('AddCategory');
+    }
+
+    const UCat = (item) =>{
+        navigation.navigate('UpdateCategory', {t:item});
+    }
 
     return (
         <View style={{flex: 1}} >
 
-            <View style={{flex:20, backgroundColor: 'lightsteelblue'}}>
-            
+            <View style={{flex:1, height:50, backgroundColor: 'lightsteelblue'}}>
+                <TouchableOpacity onPress={() => ACat()} style={{backgroundColor:'moccasin', margin:10, borderRadius:10, alignItems:'center', padding:20}} >
+                    <Text>Add Category</Text>
+                </TouchableOpacity>
+                
+                <View>
+
                     {
                         categories.map((item) => (
 
@@ -44,10 +75,10 @@ const CategoryList = () => {
                                     </ListItem>
                                     
                                 </View>
-                                <TouchableOpacity style={{ flex: 2, backgroundColor: Atheme.secondaryBackground, margin:10, borderRadius:10, alignItems:'center', justifyContent:'center' }}>
+                                <TouchableOpacity onPress={() => UCat(item)} style={{ flex: 2, backgroundColor: Atheme.secondaryBackground, margin:10, borderRadius:10, alignItems:'center', justifyContent:'center' }}>
                                     <EditTwoTone twoToneColor="#8b0000" style={{fontSize:'40px'}} />
                                 </TouchableOpacity>
-                                <TouchableOpacity style={{ flex: 2, backgroundColor: Atheme.secondaryBackground, margin:10, borderRadius:10, alignItems:'center', justifyContent:'center' }}>
+                                <TouchableOpacity onPress={() => deleteCategory(item, item.id)} style={{ flex: 2, backgroundColor: Atheme.secondaryBackground, margin:10, borderRadius:10, alignItems:'center', justifyContent:'center' }}>
                                     <FireTwoTone twoToneColor="#8b0000" style={{fontSize:'40px'}} />
                                 </TouchableOpacity>
 
@@ -55,6 +86,7 @@ const CategoryList = () => {
 
                         ))
                     }
+                </View>
                 
             </View>
         </View>

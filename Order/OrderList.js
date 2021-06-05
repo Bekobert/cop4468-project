@@ -21,7 +21,8 @@ const OrderList = () => {
 
     }, [])
     
-    
+    orders.sort((a,b) => Date.parse(a.orderDate).valueOf() - Date.parse(b.orderDate).valueOf())
+
     return (
         <View style={{flex: 1}} >
 
